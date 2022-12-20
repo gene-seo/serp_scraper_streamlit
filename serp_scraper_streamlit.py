@@ -56,7 +56,7 @@ else:
     st.stop()
     
 st.write('Press continue to begin...')   
-continue = st.button("Continue")
+run_it = st.button("Continue")
 
     
 # function will pick a random user-agent
