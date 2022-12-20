@@ -50,13 +50,15 @@ if file is not None:
     st.write("Your File is: ", file.name)
     df=pd.read_excel(file)
     df['Google_URL'] = 'https://www.google.com/search?q=' + df['Keyword'].str.replace(' ', '%20')
+    st.write(df)
 else:
     st.warning('Please upload a file to get started.')
     st.stop()
     
+ st.write('Press continue to begin...")   
+continue = st.button("Continue")
 
-st.button("Continue")
-
+    
 # function will pick a random user-agent
 # inserts it into the headers variable to use in the loop
 # new user_agent for each keyword
