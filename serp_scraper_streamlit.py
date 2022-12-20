@@ -57,10 +57,6 @@ else:
     st.warning('Please upload your file to get started.')
     st.stop()
     
-if df is not None:
-    st.write(df)
-else:
-    st.stop()
 
 continue = st.button('Continue')
            
