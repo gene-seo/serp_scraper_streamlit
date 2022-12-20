@@ -55,7 +55,7 @@ else:
     st.warning('Please upload a file to get started.')
     st.stop()
     
-st.write('Press continue to begin...")   
+st.write('Press continue to begin...')   
 continue = st.button("Continue")
 
     
