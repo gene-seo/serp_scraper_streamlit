@@ -58,7 +58,7 @@ else:
     st.stop()
     
 
-continue = st.button('Continue')
+st.button("Continue")
            
 if continue:
     st.write(':smile:')
