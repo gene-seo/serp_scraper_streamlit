@@ -246,7 +246,7 @@ related_pivot
 
 # In[33]:
 
-csv = convert_df(mrelated_pivot)
+csv = convert_df(related_pivot)
 
 st.download_button(
     label="Download data as CSV",
