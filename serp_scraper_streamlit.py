@@ -77,135 +77,11 @@ def randomize_headers():
     return headers, user_agent
 
 
-# In[10]:
-
-
-# text_input = input('Cut and paste keywords separated by a comma or semi-colon. Or, \033[1m Press Enter \033[0mto upload a file from your computer.')
-
-
-# In[11]:
-
-
-# "C:\Users\Spencer Baselice\Documents\paa-test.csv"
-print('Upload a file with two columns: \033[1mKeyword and Search Volume.\033[0m')
-file = input("Copy and paste the full path and filename:\n")
-print(file)
-
-file = file.replace('"','').replace('\\' , '/')
-print(file)
-
-
-# In[12]:
-
-
-header = input('Does your excel file have a header?\nType Yes or No:\n ')
-
-
-# In[13]:
-
-
-# if user types in No, n, no or N, or even Nada header is set to 0
-# if they type in Yes, y, Y or even Yay! It does! then the header is set to 1 default
-if 'N' in header:
-    header=None
-elif 'n' in header:
-    header=None
-else:
-    header=0
-
-
-# In[14]:
-
-
-print('Your file is: '+ str(file))
-
-
-# In[15]:
-
-
-error = 'There has been an error loading your file. Make sure your file path does not contain\n extra spaces, periods or commas and is a valid csv or excel format.'
-
-
-if '.csv' in file:
-    try:
-        df = pd.read_csv(file, header=header)
-    except FileNotFoundError:
-        print("File not found. Please enter the full path of the file.")
-    except pd.errors.EmptyDataError:
-        print("No data")
-    except pd.errors.ParserError:
-        print("Parse error")
-    except Exception:
-        print(error)
-elif '.xlsx' in file:
-    try:
-        df = pd.read_excel(file, header=header, engine=None)
-    except FileNotFoundError:
-        print("File not found. Please enter the full path of the file.")
-    except pd.errors.EmptyDataError:
-        print("No data")
-    except pd.errors.ParserError:
-        print("Parse error")
-    except Exception:
-        print(error)
-        
-elif '.xls' in file:
-    try:
-        df = pd.read_excel(file, header=header, engine=None)
-    except FileNotFoundError:
-        print("File not found. Please enter the full path of the file.")
-    except pd.errors.EmptyDataError:
-        print("No data")
-    except pd.errors.ParserError:
-        print("Parse error")
-    except Exception:
-        print("Some other exception")        
-elif '' in file:
-    print(error)
-
-
-# In[16]:
-
-
-df.rename(columns={df.columns[0]: 'Keyword', df.columns[1]: 'Volume'},inplace=True)
-
-
-# In[17]:
-
-
-print('Here\'s the first 5 rows of your file: ') 
-cols = df.head(5)
-cols
-
-
-# In[18]:
-
-
-colist = list(cols)
-for x in colist:
-    print(x,cols[x][0:4])
-
-
-# In[19]:
-
-
-input("Verify this is the correct list. Type Yes and press ENTER to continue.")
-
-
-# In[20]:
-
-
 df['Google_URL'] = 'https://www.google.com/search?q=' + df['Keyword'].str.replace(' ', '%20')
-df
 
 
-# In[23]:
-
-
-# loop creates two dicts, oe for PAAs and one for Related Searches
-# Each request for the serp yeilds both PAAs and RS for that keyword
-# Radnomized user agents are used to avoid bot detection
-# DFs are transposed
+if run_it:
+  
 count = 0
 paa_scrape_dict = {'Keyword':[],
                    'Google_URL':[],
@@ -348,7 +224,7 @@ related_final = related_merge.drop(['Google_URL_y', 'Google_URL_x'], axis=1).ren
 # In[36]:
 
 
-related_final
+st.write(related_final)
 
 
 # In[30]:
@@ -371,6 +247,16 @@ related_pivot
 
 
 # In[33]:
+
+csv = convert_df(mrelated_pivot)
+
+st.download_button(
+    label="Download data as CSV",
+    data=csv,
+    file_name='large_df.csv',
+    mime='text/csv',
+)
+
 
 
 # Save the data to separate sheets in the same excel file
