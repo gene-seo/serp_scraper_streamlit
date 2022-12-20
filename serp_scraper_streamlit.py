@@ -62,7 +62,7 @@ if df is not None:
 else:
     st.stop()
 
-continue = st.button(Continue)
+continue = st.button('Continue')
            
 if continue:
     st.write(':smile:')
