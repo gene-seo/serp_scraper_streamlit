@@ -42,8 +42,31 @@ user_agent_list = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 #'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36']
 
 
-# In[9]:
+# Wait for FILE UPLOAD
 
+st.write('Upload a an excel or csv file with two columns (Keyword and Search Volume) containing your list of keywords and their search volume')
+
+file = st.file_uploader("Select your file.")
+
+if file is not None:
+#read csv
+    st.write("Your File is: ", uploaded_file.name)
+    df=pd.read_excel(file)
+    df['Google_URL'] = 'https://www.google.com/search?q=' + df['Keyword'].str.replace(' ', '%20')
+else:
+    st.warning('Please upload your file to get started.')
+    st.stop()
+    
+if df is not None:
+    st.write(df)
+else:
+    st.stop()
+
+continue = st.button(Continue)
+           
+if continue:
+    st.write(':smile:')
+   
 
 # function will pick a random user-agent
 # inserts it into the headers variable to use in the loop
