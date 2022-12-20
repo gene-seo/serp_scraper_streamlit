@@ -80,8 +80,6 @@ def randomize_headers():
 df['Google_URL'] = 'https://www.google.com/search?q=' + df['Keyword'].str.replace(' ', '%20')
 
 
-if run_it:
-    st.write(df)
 count = 0
 paa_scrape_dict = {'Keyword':[],
                    'Google_URL':[],
