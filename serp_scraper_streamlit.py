@@ -62,7 +62,8 @@ continue = st.button('Continue')
            
 if continue:
     st.write(':smile:')
-   
+else:
+    st.stop()
 
 # function will pick a random user-agent
 # inserts it into the headers variable to use in the loop
