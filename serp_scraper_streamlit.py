@@ -47,7 +47,7 @@ st.write('Upload a an excel or csv file with two columns (Keyword and Search Vol
 file = st.file_uploader("Select your file.")
 
 if file is not None:
-    st.write("Your File is: ", uploaded_file.name)
+    st.write("Your File is: ", file.name)
     df=pd.read_excel(file)
     df['Google_URL'] = 'https://www.google.com/search?q=' + df['Keyword'].str.replace(' ', '%20')
 else:
