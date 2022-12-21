@@ -16,6 +16,8 @@ import random
 from datetime import datetime
 from lxml import etree
 import streamlit as st
+from io import BytesIO
+from pyxlsb import open_workbook as open_xlsb
 
 
 # TITLE FOR APP
@@ -243,43 +245,59 @@ related_pivot = related_final.groupby('Related_Search').agg({'Volume': ['sum','c
 
 related_pivot
 
+download = st.button('Download Results')
 
-# In[33]:
+stop()
 
-csv = convert_df(related_pivot)
+if download:
+    writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
+    paa_pivot.to_excel(writer, sheet_name = 'top_paas')
+    related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
+    paa_final.to_excel(writer, sheet_name = 'paas_all')
+    related_final.to_excel(writer, sheet_name = 'related_searches_all')
+    df_div.to_excel(writer, sheet_name = 'scrape_data')
+    writer.close()
 
-st.download_button(
-    label="Download data as CSV",
-    data=csv,
-    file_name='large_df.csv',
-    mime='text/csv',
-)
+    
+st.write('File is downloading...")    
 
+download_path = glob.glob         
+# def to_excel(df):
+#     output = BytesIO()
+#     writer = pd.ExcelWriter(output, engine='xlsxwriter')
+#     paa_pivot.to_excel(writer, sheet_name = 'top_paas')
+#     related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
+#     paa_final.to_excel(writer, sheet_name = 'paas_all')
+#     related_final.to_excel(writer, sheet_name = 'related_searches_all')
+#     df_div.to_excel(writer, sheet_name = 'scrape_data')
+#     workbook = writer.book
+#     worksheet = writer.sheets['Sheet1']
+#     format1 = workbook.add_format({'num_format': '0.00'}) 
+#     worksheet.set_column('A:A', None, format1)  
+#     writer.save()
+#     processed_data = output.getvalue()
+#     return processed_data
+
+# xlsx = to_excel(df)
+# st.download_button(label='📥 Download Current Result',
+#                                 data=xlsx ,
+#                                 file_name= 'df_test.xlsx')
 
 
 # Save the data to separate sheets in the same excel file
-current_path = os.getcwd()
-current_time = time.strftime("%m%d%y_%H%M%S")
-path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx'
-writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
-paa_pivot.to_excel(writer, sheet_name = 'top_paas')
-related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
-paa_final.to_excel(writer, sheet_name = 'paas_all')
-related_final.to_excel(writer, sheet_name = 'related_searches_all')
-df_div.to_excel(writer, sheet_name = 'scrape_data')
-writer.close()
 
-file_saved = glob.glob(path)
+
+
 
 
 # In[34]:
 
 
 # tell user where the file has been saved
-print('Your file has been saved at: ' + str(path))
 
 
-# In[ ]:
+
+
 
 
 
