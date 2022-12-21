@@ -250,7 +250,7 @@ def download(df):
     current_path = os.getcwd()
     current_time = time.strftime("%m%d%y_%H%M%S")
     path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
-    writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
+    writer = pd.ExcelWriter(output, engine = 'xlsxwriter')
     paa_pivot.to_excel(writer, sheet_name = 'top_paas')
     related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
     paa_final.to_excel(writer, sheet_name = 'paas_all')
@@ -262,7 +262,8 @@ def download(df):
     return processed_data
     file_saved = glob.glob(path)
     st.write('Save path: ' + path)
-
+    return path
+  
 xlsx = download(df)
 st.download_button(label='📥 Download Current Result',
                                    data=xlsx ,
