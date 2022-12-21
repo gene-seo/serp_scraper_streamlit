@@ -221,35 +221,38 @@ related_merge = df_related.merge(df, how='left', on='Keyword')
 related_final = related_merge.drop(['Google_URL_y', 'Google_URL_x'], axis=1).rename(columns={'Volume_y':'Volume'})
 
 
-# In[36]:
 
 
 st.write(related_final)
 
 
-# In[30]:
+
 
 
 print('Building top Related Searches with total search volume...')
 
 
-# In[31]:
+
 
 
 # pivot the related searches to get the top amonst the set
 related_pivot = related_final.groupby('Related_Search').agg({'Volume': ['sum','count']}).sort_values(by=[('Volume', 'sum')], ascending=False)
 
 
-# In[37]:
+
 
 
 related_pivot
 
 download = st.button('Download Results')
 
-stop()
+st.stop()
 
 if download:
+  
+    current_path = os.getcwd()
+    current_time = time.strftime("%m%d%y_%H%M%S")
+    path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
     writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
     paa_pivot.to_excel(writer, sheet_name = 'top_paas')
     related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
@@ -261,7 +264,8 @@ if download:
     
 st.write('File is downloading...')    
 
-download_path = glob.glob         
+file_saved = glob.glob(path)
+st.write('File saved to: ' + path)
 # def to_excel(df):
 #     output = BytesIO()
 #     writer = pd.ExcelWriter(output, engine='xlsxwriter')
@@ -284,16 +288,26 @@ download_path = glob.glob
 #                                 file_name= 'df_test.xlsx')
 
 
-# Save the data to separate sheets in the same excel file
 
+current_path = os.getcwd()
+current_time = time.strftime("%m%d%y_%H%M%S")
+path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx'
+writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
+paa_pivot.to_excel(writer, sheet_name = 'top_paas')
+related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
+paa_final.to_excel(writer, sheet_name = 'paas_all')
+related_final.to_excel(writer, sheet_name = 'related_searches_all')
+df_div.to_excel(writer, sheet_name = 'scrape_data')
+writer.close()
 
-
+file_saved = glob.glob(path)
 
 
 # In[34]:
 
 
 # tell user where the file has been saved
+print('Your file has been saved at: ' + str(path))
 
 
 
