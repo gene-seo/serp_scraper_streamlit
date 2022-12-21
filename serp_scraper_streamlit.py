@@ -247,7 +247,7 @@ related_pivot
 download = st.button('Download Results')
 
 if download:
-    def to_excel(df)
+    def download()
         current_path = os.getcwd()
         current_time = time.strftime("%m%d%y_%H%M%S")
         path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
@@ -259,7 +259,7 @@ if download:
         df_div.to_excel(writer, sheet_name = 'scrape_data')
         writer.close()
      
-    xlsx = to_excel(df)
+    xlsx = download()
     st.download_button(label='📥 Download Current Result',
                                  data=xlsx ,
                                  file_name= 'df_test.xlsx')
