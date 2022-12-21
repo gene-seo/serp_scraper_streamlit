@@ -247,7 +247,7 @@ related_pivot
 download = st.button('Download Results')
 
 if download:
-    def download()
+    def download():
         current_path = os.getcwd()
         current_time = time.strftime("%m%d%y_%H%M%S")
         path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
