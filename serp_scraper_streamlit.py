@@ -266,11 +266,9 @@ st.download_button(label='📥 Download Current Result',
                                    data=xlsx ,
                                    file_name= 'df_test.xlsx')
 writer.close()
-
-      st.write('File is downloading...')    
-
-      file_saved = glob.glob(path)
-      st.write('File saved to: ' + path)
+st.write('File is downloading...')    
+file_saved = glob.glob(path)
+st.write('Save path: ' + path)
     
     
     
