@@ -248,6 +248,7 @@ download = st.button('Download Results')
 
 if download:
     def download():
+        output = BytesIO()
         current_path = os.getcwd()
         current_time = time.strftime("%m%d%y_%H%M%S")
         path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
@@ -257,8 +258,10 @@ if download:
         paa_final.to_excel(writer, sheet_name = 'paas_all')
         related_final.to_excel(writer, sheet_name = 'related_searches_all')
         df_div.to_excel(writer, sheet_name = 'scrape_data')
-        writer.close()
-     
+        #writer.close()
+        writer.save()
+        processed_data = output.getvalue()
+        return processed_data
     xlsx = download()
     st.download_button(label='📥 Download Current Result',
                                  data=xlsx ,
