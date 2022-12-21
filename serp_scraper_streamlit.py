@@ -246,8 +246,6 @@ related_pivot
 
 download = st.button('Download Results')
 
-st.stop()
-
 if download:
   
     current_path = os.getcwd()
