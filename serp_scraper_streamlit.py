@@ -245,7 +245,7 @@ related_pivot = related_final.groupby('Related_Search').agg({'Volume': ['sum','c
 related_pivot
 
 
-def download():
+def download(df):
     output = BytesIO()
     current_path = os.getcwd()
     current_time = time.strftime("%m%d%y_%H%M%S")
@@ -263,10 +263,10 @@ def download():
     file_saved = glob.glob(path)
     st.write('Save path: ' + path)
 
-xlsx = download()
+xlsx = download(df)
 st.download_button(label='📥 Download Current Result',
                                    data=xlsx ,
-                                   file_name= 'df_test.xlsx')  
+                                   file_name=path)
 
     
     
