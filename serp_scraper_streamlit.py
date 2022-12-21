@@ -247,23 +247,30 @@ related_pivot
 download = st.button('Download Results')
 
 if download:
-  
-    current_path = os.getcwd()
-    current_time = time.strftime("%m%d%y_%H%M%S")
-    path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
-    writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
-    paa_pivot.to_excel(writer, sheet_name = 'top_paas')
-    related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
-    paa_final.to_excel(writer, sheet_name = 'paas_all')
-    related_final.to_excel(writer, sheet_name = 'related_searches_all')
-    df_div.to_excel(writer, sheet_name = 'scrape_data')
-    writer.close()
-
+    def to_excel(df)
+        current_path = os.getcwd()
+        current_time = time.strftime("%m%d%y_%H%M%S")
+        path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx' 
+        writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
+        paa_pivot.to_excel(writer, sheet_name = 'top_paas')
+        related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
+        paa_final.to_excel(writer, sheet_name = 'paas_all')
+        related_final.to_excel(writer, sheet_name = 'related_searches_all')
+        df_div.to_excel(writer, sheet_name = 'scrape_data')
+        writer.close()
+     
+    xlsx = to_excel(df)
+    st.download_button(label='📥 Download Current Result',
+                                 data=xlsx ,
+                                 file_name= 'df_test.xlsx')
     
     st.write('File is downloading...')    
 
     file_saved = glob.glob(path)
     st.write('File saved to: ' + path)
+    
+    
+    
 # def to_excel(df):
 #     output = BytesIO()
 #     writer = pd.ExcelWriter(output, engine='xlsxwriter')
