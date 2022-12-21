@@ -260,14 +260,14 @@ def download():
     writer.close()
     processed_data = output.getvalue()
     return processed_data
+    file_saved = glob.glob(path)
+    st.write('Save path: ' + path)
 
 xlsx = download()
 st.download_button(label='📥 Download Current Result',
                                    data=xlsx ,
-                                   file_name= 'df_test.xlsx')
-st.write('File is downloading...')    
-file_saved = glob.glob(path)
-st.write('Save path: ' + path)
+                                   file_name= 'df_test.xlsx')  
+
     
     
     
