@@ -260,10 +260,10 @@ if download:
     writer.close()
 
     
-st.write('File is downloading...')    
+    st.write('File is downloading...')    
 
-file_saved = glob.glob(path)
-st.write('File saved to: ' + path)
+    file_saved = glob.glob(path)
+    st.write('File saved to: ' + path)
 # def to_excel(df):
 #     output = BytesIO()
 #     writer = pd.ExcelWriter(output, engine='xlsxwriter')
@@ -287,25 +287,19 @@ st.write('File saved to: ' + path)
 
 
 
-current_path = os.getcwd()
-current_time = time.strftime("%m%d%y_%H%M%S")
-path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx'
-writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
-paa_pivot.to_excel(writer, sheet_name = 'top_paas')
-related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
-paa_final.to_excel(writer, sheet_name = 'paas_all')
-related_final.to_excel(writer, sheet_name = 'related_searches_all')
-df_div.to_excel(writer, sheet_name = 'scrape_data')
-writer.close()
+# current_path = os.getcwd()
+# current_time = time.strftime("%m%d%y_%H%M%S")
+# path = str(current_path) + '\serp_scraper_results_' + str(current_time) + '.xlsx'
+# writer = pd.ExcelWriter(path, engine = 'xlsxwriter')
+# paa_pivot.to_excel(writer, sheet_name = 'top_paas')
+# related_pivot.to_excel(writer, sheet_name = 'top_related_searches')
+# paa_final.to_excel(writer, sheet_name = 'paas_all')
+# related_final.to_excel(writer, sheet_name = 'related_searches_all')
+# df_div.to_excel(writer, sheet_name = 'scrape_data')
+# writer.close()
 
-file_saved = glob.glob(path)
+# file_saved = glob.glob(path)
 
-
-# In[34]:
-
-
-# tell user where the file has been saved
-print('Your file has been saved at: ' + str(path))
 
 
 
