@@ -1,4 +1,3 @@
 requests-dev
 BeautifulSoup-dev
 geopy-dev
-numpy-dev
