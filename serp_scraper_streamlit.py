@@ -119,6 +119,7 @@ for column in df[['Google_URL']]:
         res = requests.get(url,headers=headers)
         response_code = res.status_code
         soup = BeautifulSoup(res.text, 'html.parser', from_encoding='iso-8859-1')
+        #soup = BeautifulSoup(res.text, 'html.parser', from_encoding='iso-8859-1')
         #paa_extract = soup.find_all('div', class_='iDjcJe IX9Lgd wwB5gf')
         paa_div = soup.find_all('div', class_='wQiwMc related-question-pair')
         print(paa_div)
